@@ -52,3 +52,21 @@ if prompt := st.chat_input("Ask me anything about GenAI interviews..."):
 
     # show assistant message
     st.chat_message("assistant").write(reply)
+
+
+
+    if st.session_state.history:
+
+        history_text = "\n\n".join(
+            [
+                f"{'USER' if m['role'] == 'user' else 'ASSISTANT'}:\n{m['parts'][0]['text']}"
+                for m in st.session_state.history
+            ]
+        )
+
+        st.download_button(
+            label="📥 Download Conversation",
+            data=history_text,
+            file_name="interview_session.txt",
+            mime="text/plain"
+        )
