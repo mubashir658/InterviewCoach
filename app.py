@@ -4,7 +4,10 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
+
 
 st.title("GenAI Interview Coach")
 st.caption("Powered by Gemini 2.5 Flash")
